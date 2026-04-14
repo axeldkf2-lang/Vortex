@@ -1,72 +1,81 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Vortex - Curso de TI</title>
+<meta charset="UTF-8">
+<title>Vortex</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      background: #0f172a;
-      color: white;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0f172a;
+  color: white;
+}
 
-    .container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+/* LOGIN */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-    .box {
-      background: #1e293b;
-      padding: 30px;
-      border-radius: 10px;
-      width: 300px;
-      text-align: center;
-    }
+.box {
+  background: #1e293b;
+  padding: 30px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+}
 
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 5px;
-      border: none;
-    }
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: none;
+}
 
-    button {
-      width: 100%;
-      padding: 10px;
-      background: #22c55e;
-      border: none;
-      color: white;
-      font-weight: bold;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+button {
+  width: 100%;
+  padding: 10px;
+  background: #22c55e;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-    button:hover {
-      background: #16a34a;
-    }
+button:hover {
+  background: #16a34a;
+}
 
-    .curso {
-      display: none;
-      padding: 20px;
-    }
+/* CURSO */
+.curso {
+  display: none;
+  padding: 20px;
+}
 
-    .modulo {
-      background: #1e293b;
-      padding: 20px;
-      margin: 10px 0;
-      border-radius: 10px;
-    }
+.modulo {
+  background: #1e293b;
+  padding: 20px;
+  margin: 10px 0;
+  border-radius: 10px;
+}
 
-    h1 {
-      text-align: center;
-      color: #38bdf8;
-    }
-  </style>
+.aulas {
+  display: none;
+  margin-top: 10px;
+}
+
+.aula {
+  background: #334155;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+</style>
 </head>
 
 <body>
@@ -76,56 +85,110 @@
   <div class="box">
     <h2>🔐 Vortex</h2>
 
-    <input type="text" id="user" placeholder="Usuário">
-    <input type="password" id="pass" placeholder="Senha">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="senha" placeholder="Senha">
 
     <button onclick="login()">Entrar</button>
-    <button onclick="register()">Cadastrar</button>
+    <button onclick="mostrarCadastro()">Cadastrar</button>
+  </div>
+</div>
+
+<!-- CADASTRO -->
+<div class="container" id="cadastroBox" style="display:none;">
+  <div class="box">
+    <h2>📩 Cadastro</h2>
+
+    <input type="email" id="newEmail" placeholder="Email">
+    <input type="password" id="newSenha" placeholder="Criar senha">
+
+    <button onclick="cadastrar()">Criar Conta</button>
   </div>
 </div>
 
 <!-- CURSO -->
 <div class="curso" id="cursoBox">
 
-  <h1>🚀 VORTEX - Curso de TI</h1>
+<h1>🚀 VORTEX</h1>
 
-  <div class="modulo">📚 Fundamentos</div>
-  <div class="modulo">🧠 Lógica de Programação</div>
-  <div class="modulo">🐍 Python</div>
-  <div class="modulo">🗄️ Banco de Dados</div>
-  <div class="modulo">🌐 Desenvolvimento Web</div>
-  <div class="modulo">🔐 Segurança</div>
+<!-- MÓDULO 1 -->
+<div class="modulo">
+  <h3>📚 Fundamentos</h3>
+  <button onclick="toggle('m1')">Abrir</button>
 
-  <button onclick="logout()">Sair</button>
+  <div id="m1" class="aulas">
+    <div class="aula">Aula 1: Introdução + Atividade</div>
+    <div class="aula">Aula 2: Sistemas + Atividade</div>
+  </div>
+</div>
+
+<!-- MÓDULO 2 -->
+<div class="modulo">
+  <h3>🧠 Lógica</h3>
+  <button onclick="toggle('m2')">Abrir</button>
+
+  <div id="m2" class="aulas">
+    <div class="aula">Aula 1: Variáveis + Atividade</div>
+    <div class="aula">Aula 2: Condições + Atividade</div>
+  </div>
+</div>
+
+<!-- MÓDULO 3 -->
+<div class="modulo">
+  <h3>🐍 Python</h3>
+  <button onclick="toggle('m3')">Abrir</button>
+
+  <div id="m3" class="aulas">
+    <div class="aula">Aula 1: Código + Atividade</div>
+    <div class="aula">Aula 2: Funções + Atividade</div>
+  </div>
+</div>
+
+<button onclick="logout()">Sair</button>
 
 </div>
 
 <script>
-  function register() {
-    let user = document.getElementById("user").value;
-    let pass = document.getElementById("pass").value;
 
-    localStorage.setItem(user, pass);
-    alert("Cadastrado com sucesso!");
+function mostrarCadastro() {
+  document.getElementById("loginBox").style.display = "none";
+  document.getElementById("cadastroBox").style.display = "flex";
+}
+
+function cadastrar() {
+  let email = document.getElementById("newEmail").value;
+  let senha = document.getElementById("newSenha").value;
+
+  localStorage.setItem(email, senha);
+
+  alert("Conta criada!");
+  
+  document.getElementById("cadastroBox").style.display = "none";
+  document.getElementById("loginBox").style.display = "flex";
+}
+
+function login() {
+  let email = document.getElementById("email").value;
+  let senha = document.getElementById("senha").value;
+
+  let saved = localStorage.getItem(email);
+
+  if (saved === senha) {
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("cursoBox").style.display = "block";
+  } else {
+    alert("Email ou senha incorretos");
   }
+}
 
-  function login() {
-    let user = document.getElementById("user").value;
-    let pass = document.getElementById("pass").value;
+function toggle(id) {
+  let el = document.getElementById(id);
+  el.style.display = el.style.display === "block" ? "none" : "block";
+}
 
-    let saved = localStorage.getItem(user);
+function logout() {
+  location.reload();
+}
 
-    if (saved === pass) {
-      document.getElementById("loginBox").style.display = "none";
-      document.getElementById("cursoBox").style.display = "block";
-    } else {
-      alert("Usuário ou senha incorretos");
-    }
-  }
-
-  function logout() {
-    location.reload();
-  }
 </script>
 
 </body>
