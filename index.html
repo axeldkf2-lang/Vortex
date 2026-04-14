@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Vortex - Login</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .box {
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #22c55e;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #16a34a;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>🔐 Vortex Login</h2>
+
+  <input type="text" id="user" placeholder="Usuário">
+  <input type="password" id="pass" placeholder="Senha">
+
+  <button onclick="login()">Entrar</button>
+  <button onclick="register()">Cadastrar</button>
+
+</div>
+
+<script>
+  function register() {
+    let user = document.getElementById("user").value;
+    let pass = document.getElementById("pass").value;
+
+    localStorage.setItem(user, pass);
+    alert("Cadastrado com sucesso!");
+  }
+
+  function login() {
+    let user = document.getElementById("user").value;
+    let pass = document.getElementById("pass").value;
+
+    let saved = localStorage.getItem(user);
+
+    if (saved === pass) {
+      alert("Login feito!");
+      window.location.href = "curso.html";
+    } else {
+      alert("Usuário ou senha incorretos");
+    }
+  }
+</script>
+
+</body>
+</html>
